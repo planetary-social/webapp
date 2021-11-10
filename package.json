@@ -4,7 +4,8 @@
   "description": "Trying serverless",
   "main": "index.js",
   "scripts": {
-    "build": "cp src/index.html public/",
+    "copy": "cp src/index.html public/",
+    "build": "npm run copy",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
