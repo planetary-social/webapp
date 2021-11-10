@@ -4,10 +4,13 @@
   "description": "Trying serverless",
   "main": "index.js",
   "scripts": {
-    "copy": "cp src/index.html public/",
-    "build": "npm run copy && npm run build-sass",
+    "start": "npm run build && concurrently --kill-others \"npm run watch-sass\" \"npm run watch-js\" \"netlify dev --port=8888\"",
+    "copy": "mkdir -p public && cp src/index.html src/_redirects public/",
+    "build": "npm run copy && npm run build-js && npm run build-sass",
     "build-sass": "sass src/style/main.scss public/style.css",
+    "watch-sass": "sass --watch src/style/main.scss public/style.css",
     "build-js": "browserify -p esmify -t envify -t uglifyify --debug src/index.js > public/bundle.js",
+    "watch-js": "watchify -p esmify -t envify -t uglifyify --debug src/index.js -o public/bundle.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,10 +25,13 @@
   "homepage": "https://github.com/planetary-social/webapp#readme",
   "devDependencies": {
     "browserify": "^17.0.0",
+    "concurrently": "^6.3.0",
     "envify": "^4.1.0",
     "esmify": "^2.1.1",
     "netlify-cli": "^6.14.19",
     "sass": "^1.43.4",
-    "uglifyify": "^5.0.2"
+    "uglifyify": "^5.0.2",
+    "watchify": "^4.0.0"
   }
 }
+
