@@ -1,3 +1,11 @@
-[functions]
-  directory = "api"
+[build]
+  command = "npm run build"
+  functions = "api"
+  publish = "public"
+
+[dev]
+  autoLaunch = false
+  publish = "public" # Folder with the static content for _redirect file
+
+## more info on configuring this file: https://www.netlify.com/docs/netlify-toml-reference/
 
