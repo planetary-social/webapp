@@ -2,7 +2,7 @@
 exports.handler = function (ev, ctx, cb) {
     return cb(null, {
         statusCode: 200,
-        body: 'hello'
+        body: 'hello function'
     })
 }
 
