@@ -91,3 +91,6 @@ bundle.js
 public/*
 
 .env
+
+# Local Netlify folder
+.netlify
