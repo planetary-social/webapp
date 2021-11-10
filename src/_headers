@@ -1,0 +1,8 @@
+# a path:
+# /templates/index.html
+/.well-known/apple-app-site-association
+  # headers for that path:
+  Content-Type: application/json
+  # X-Frame-Options: DENY
+  # X-XSS-Protection: 1; mode=block
+

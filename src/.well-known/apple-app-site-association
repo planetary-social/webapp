@@ -1,0 +1,19 @@
+{
+   "applinks":{
+      "apps":[],
+      "details":[
+         {
+            "appID":"GZCZBKH7MY.com.planetary.ios",
+            "paths":[
+               "/p/*"
+            ],
+            "components":[
+               {
+                  "/":"/p/*"
+               }
+            ]
+         }
+      ]
+   }
+}
+

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run build && concurrently --kill-others \"npm run watch-sass\" \"npm run watch-js\" \"netlify dev --port=8888\"",
-    "copy": "mkdir -p public && cp src/index.html src/_redirects public/",
+    "copy": "mkdir -p public && cp src/index.html src/_redirects src/_headers public/ && mkdir -p public/.well-known && cp src/.well-known/* public/.well-known",
     "build": "npm run copy && npm run build-js && npm run build-sass",
     "build-sass": "sass src/style/main.scss public/style.css",
     "watch-sass": "sass --watch src/style/main.scss public/style.css",
