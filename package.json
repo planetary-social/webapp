@@ -16,6 +16,8 @@
   "bugs": {
     "url": "https://github.com/planetary-social/webapp/issues"
   },
-  "homepage": "https://github.com/planetary-social/webapp#readme"
+  "homepage": "https://github.com/planetary-social/webapp#readme",
+  "devDependencies": {
+    "netlify-cli": "^6.14.19"
+  }
 }
-
