@@ -6,6 +6,8 @@ https://vercel.com/planetary-webapp/webapp
 
 ## lambda functions
 
-See https://webapp-blush.vercel.app/api/test
+See an example -- https://webapp-blush.vercel.app/api/test
 
+docs:
+https://vercel.com/docs/concepts/functions/serverless-functions
 
