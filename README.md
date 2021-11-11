@@ -12,6 +12,17 @@ Trying vercel & netlify
 * https://app.netlify.com/sites/planetary-webapp/overview
 * https://planetary-webapp.netlify.app/
 
+## environment
+
+```
+FAUNADB_SERVER_SECRET="123"
+FAUNADB_SERVER_SECRET_TEST="123"
+CLOUDINARY_CLOUD_NAME="nichoth"
+CLOUDINARY_URL="cloudinary://123"
+CLOUDINARY_API_SECRET="123"
+CLOUDINARY_API_KEY="123"
+```
+
 ## lambda functions
 
 docs:
