@@ -28,7 +28,6 @@ exports.handler = function (ev, ctx, cb) {
     var foafs = ev.queryStringParameters.foafs
 
     if (foafs) {
-        // console.log('!!!foafs!!!', foafs)
         return getWithFoafs(userId)
             .then(res => {
                 return cb(null, {
@@ -73,11 +72,6 @@ exports.handler = function (ev, ctx, cb) {
                         return xtend(msg, {
                             mentionUrls: msg.value.content.mentions ?
                                 msg.value.content.mentions.map(m => {
-                                    // slugify the hash twice
-                                    // don't know why we need to do it twice
-                                    // var slugifiedHash = encodeURIComponent('' + m)
-                                    // var slugslug = encodeURIComponent(
-                                    //     slugifiedHash)
                                     return cloudinary.url(m)      
                                 }) :
                                 []
