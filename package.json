@@ -35,6 +35,8 @@
   },
   "dependencies": {
     "@nichoth/ssc-fauna": "^0.0.44",
-    "cloudinary": "^1.27.1"
+    "cloudinary": "^1.27.1",
+    "dotenv": "^10.0.0",
+    "xtend": "^4.0.2"
   }
 }

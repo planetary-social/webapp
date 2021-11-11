@@ -57,8 +57,6 @@ exports.handler = function (ev, ctx, cb) {
             })
     }
 
-    console.log('user id', userId)
-
     getRelevantPosts(userId)
         .then(res => {
 
@@ -70,11 +68,10 @@ exports.handler = function (ev, ctx, cb) {
                     // image
                     msg: res.map(msg => {
                         return xtend(msg, {
-                            mentionUrls: msg.value.content.mentions ?
-                                msg.value.content.mentions.map(m => {
+                            mentionUrls: (msg.value.content.mentions || [])
+                                .map(m => {
                                     return cloudinary.url(m)      
-                                }) :
-                                []
+                                })
                         })
                     })
                 })
