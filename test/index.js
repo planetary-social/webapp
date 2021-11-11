@@ -2,7 +2,9 @@ var test = require('tape')
 var client = require('../src/client')
 var { spawn } = require('child_process')
 var fs = require('fs')
-                
+var ssc = require('@nichoth/ssc')
+var createHash = require('../api/create-hash')
+
 var caracal = fs.readFileSync(__dirname + '/caracal.jpg')
 let base64Caracal = 'data:image/png;base64,' + caracal.toString('base64')
 
@@ -29,9 +31,24 @@ test('setup', function (t) {
 })
 
 test('post', t => {
-    client.post(msg, [ base64Caracal ])
+    var keys = ssc.createKeys()
+    // (keys, prevMsg, content)
+    var msg = ssc.createMsg(keys, null, {
+        type: 'test',
+        text: 'wooo',
+        mentions: [createHash(base64Caracal)]
+    })
+
+    client.post({ public: keys.public }, msg, [ base64Caracal ])
         .then(res => {
             console.log('res', res)
+            t.fail("should get an error if we're not following them")
+            t.end()
+        })
+        .catch (err => {
+            t.pass("returns an error because we're not following them")
+            t.ok(err.toString().includes('NotFound'),
+                "should return an error that you're not following the user")
             t.end()
         })
 })

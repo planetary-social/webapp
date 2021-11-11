@@ -1,4 +1,5 @@
 let cloudinary = require("cloudinary").v2;
+var faunadb = require('faunadb')
 var ssc = require('@nichoth/ssc')
 var createHash = require('./create-hash')
 var sscBlobs = require('@planetary-ssb/ssc-blobs')
@@ -45,9 +46,9 @@ exports.handler = function (ev, ctx, cb) {
     var isValid
     try {
         isValid = (ssc.verifyObj(keys, null, msg) &&
-            msg.mentions.length === files.length &&
+            msg.content.mentions.length === files.length &&
             files.reduce((acc, file, i) => {
-                return acc && (createHash(file) === msg.mentions[i])
+                return acc && (createHash(file) === msg.content.mentions[i])
             }, true)
         )
     } catch (err) {
@@ -55,7 +56,7 @@ exports.handler = function (ev, ctx, cb) {
             statusCode: 422,
             body: JSON.stringify({
                 ok: false,
-                error: err,
+                error: err.toString(),
                 message: msg
             })
         })
