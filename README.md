@@ -2,7 +2,7 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/1b34bf73-6038-4760-ac36-95d7086044d6/deploy-status)](https://app.netlify.com/sites/planetary-webapp/deploys)
 
-Trying vercel & netlify
+Trying netlify
 
 * https://vercel.com/planetary-webapp/webapp
 * https://webapp-blush.vercel.app/api/test
@@ -13,18 +13,25 @@ Trying vercel & netlify
 * https://planetary-webapp.netlify.app/
 
 ## environment
-
 ```
 FAUNADB_SERVER_SECRET="123"
 FAUNADB_SERVER_SECRET_TEST="123"
-CLOUDINARY_CLOUD_NAME="nichoth"
+CLOUDINARY_CLOUD_NAME="https-www-planetary-social"
 CLOUDINARY_URL="cloudinary://123"
 CLOUDINARY_API_SECRET="123"
 CLOUDINARY_API_KEY="123"
 ```
 
 ## lambda functions
-
 docs:
-https://vercel.com/docs/concepts/functions/serverless-functions
+https://docs.netlify.com/functions/overview/
+
+
+## test
+
+```
+$ npm test
+```
+
+This will test the API functions, but only on your local machine. However, it does use the internet to call the database, [faunadb](https://fauna.com/).
 
