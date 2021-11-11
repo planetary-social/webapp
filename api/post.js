@@ -1,5 +1,8 @@
 let cloudinary = require("cloudinary").v2;
 var ssc = require('@nichoth/ssc')
+var createHash = require('./create-hash')
+var sscBlobs = require('@planetary-ssb/ssc-blobs')
+var writeBlob = sscBlobs.cloudinary.write
 
 cloudinary.config({ 
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -26,7 +29,7 @@ cloudinary.config({
 
 exports.handler = function (ev, ctx, cb) {
     try {
-        var { keys, msg, file } = JSON.parse(ev.body)
+        var { keys, msg, files } = JSON.parse(ev.body)
     } catch (err) {
         return cb(null, {
             statusCode: 422,
@@ -41,7 +44,12 @@ exports.handler = function (ev, ctx, cb) {
 
     var isValid
     try {
-        isValid = ssc.verifyObj(keys, null, msg)
+        isValid = (ssc.verifyObj(keys, null, msg) &&
+            msg.mentions.length === files.length &&
+            files.reduce((acc, file, i) => {
+                return acc && (createHash(file) === msg.mentions[i])
+            }, true)
+        )
     } catch (err) {
         return cb(null, {
             statusCode: 422,
@@ -50,6 +58,13 @@ exports.handler = function (ev, ctx, cb) {
                 error: err,
                 message: msg
             })
+        })
+    }
+
+    if (!isValid) {
+        return cb(null, {
+            statusCode: 422,
+            body: 'invalid message'
         })
     }
 
@@ -63,5 +78,67 @@ exports.handler = function (ev, ctx, cb) {
     client.query(
         q.Get( q.Match(q.Index('server-following-who'), '@' + keys.public) )
     )
+        .then(() => {
+            // post the stuff
+            write(msg)
+                .then(res => {
+                    cb(null, {
+                        statusCode: 200,
+                        body: JSON.stringify({
+                            ok: true,
+                            msg: res
+                        })
+                    })
+                })
+                .catch(err => {
+                    return cb(null, {
+                        statusCode: 500,
+                        body: err.toString()
+                    })
+                })
+        })
+        .catch(err => {
+            // we are not following them
+            return cb(null, {
+                statusCode: 401,
+                body: err.toString()
+            })
+        })
+
+
+
+    function write (msg) {
+        return Promise.all([
+            writeBlob(cloudinary, base64Caracal),
+            writeMsgToDB(msg).then(res => {
+                return res
+            })
+        ])
+            .then(arr => {
+                return arr
+            })
+            .catch((err) => {
+                console.log('errrrrr', err)
+            })
+    }
+
+
+    // return the new msg
+    function writeMsgToDB (msg) {
+        var msgHash = ssc.getId(msg)
+
+        // @TODO
+        // should validate the shape of the msg before querying
+
+        return client.query(
+            q.Create(q.Collection('posts'), {
+                key: msgHash,
+                value: msg,
+            })
+        )
+            .then(res => {
+                return res
+            })
+    }
 
 }
