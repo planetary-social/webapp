@@ -32,6 +32,8 @@
     "sass": "^1.43.4",
     "uglifyify": "^5.0.2",
     "watchify": "^4.0.0"
+  },
+  "dependencies": {
+    "@nichoth/ssc-fauna": "^0.0.44"
   }
 }
-
