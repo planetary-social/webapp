@@ -4,6 +4,7 @@ var ssc = require('@nichoth/ssc')
 var createHash = require('./create-hash')
 var sscBlobs = require('@planetary-ssb/ssc-blobs')
 var writeBlob = sscBlobs.cloudinary.write
+var writeMsg = require('@nichoth/ssc-fauna/write-msg')
 
 cloudinary.config({ 
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -26,6 +27,7 @@ cloudinary.config({
 //     },
 //     "signature": "wHdXRQBt8k0rFEa9ym35pNqmeHwA+kTTdOC3N6wAn4yOb6dsfIq/X0JpHCBZVJcw6Luo6uH1udpq12I4eYzBAw==.sig.ed25519"
 // }
+
 
 
 exports.handler = function (ev, ctx, cb) {
@@ -68,13 +70,15 @@ exports.handler = function (ev, ctx, cb) {
         })
     }
 
+    // ------------------ input is valid ---------------------------
+
     var q = faunadb.query
     var client = new faunadb.Client({
-        secret: process.env.FAUNADB_SERVER_SECRET
+        secret: (process.env.NODE_ENV === 'test' ?
+            process.env.FAUNADB_SERVER_SECRET_TEST :
+            process.env.FAUNADB_SERVER_SECRET)
     })
 
-    // check that the keys.id is on the `allowed` list -- the list of
-    // people that the server is following
     client.query(
         q.Get( q.Match(q.Index('server-following-who'), '@' + keys.public) )
     )
@@ -106,40 +110,18 @@ exports.handler = function (ev, ctx, cb) {
         })
 
 
-
     function write (msg, files) {
         return Promise.all([
             Promise.all(files.map(file => {
                 return writeBlob(cloudinary, file)
             })),
-            writeMsgToDB(msg).then(res => {
-                return res
-            })
+            writeMsg(keys, msg, (m => cloudinary.url(m)))
         ])
             .then(arr => {
-                return arr
+                return arr[1]
             })
             .catch((err) => {
                 console.log('errrrrr', err)
-            })
-    }
-
-
-    // return the new msg
-    function writeMsgToDB (msg) {
-        var msgHash = ssc.getId(msg)
-
-        // @TODO
-        // should validate the shape of the msg before querying
-
-        return client.query(
-            q.Create(q.Collection('posts'), {
-                key: msgHash,
-                value: msg,
-            })
-        )
-            .then(res => {
-                return res
             })
     }
 

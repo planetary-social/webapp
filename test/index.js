@@ -32,7 +32,7 @@ test('setup', function (t) {
 })
 
 var keys
-test('post', t => {
+test("post from a user we're not following", t => {
     keys = ssc.createKeys()
     // (keys, prevMsg, content)
     var msg = ssc.createMsg(keys, null, {
@@ -42,11 +42,11 @@ test('post', t => {
     })
 
     client.post({ public: keys.public }, msg, [ base64Caracal ])
-        .then(res => {
+        .then(() => {
             t.fail("should get an error b/c we're not following them")
             t.end()
         })
-        .catch (err => {
+        .catch(err => {
             t.pass("returns an error because we're not following them")
             t.ok(err.toString().includes('NotFound'),
                 "should return an error that you're not following the user")
@@ -86,8 +86,10 @@ test('post', t => {
     })
 
     client.post(keys, msg, [ base64Caracal ])
-        .then(() => {
+        .then((res) => {
             t.pass('should post a new message')
+            t.equal(res.msg.value.author, keys.id,
+                'should return the right msg')
             t.end()
         })
         .catch ((err) => {
