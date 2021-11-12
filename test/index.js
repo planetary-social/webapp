@@ -1,4 +1,5 @@
 var test = require('tape')
+require('dotenv').config()
 var client = require('../src/client')
 var { spawn } = require('child_process')
 var fs = require('fs')
@@ -30,8 +31,9 @@ test('setup', function (t) {
     })
 })
 
+var keys
 test('post', t => {
-    var keys = ssc.createKeys()
+    keys = ssc.createKeys()
     // (keys, prevMsg, content)
     var msg = ssc.createMsg(keys, null, {
         type: 'test',
@@ -52,6 +54,21 @@ test('post', t => {
             t.end()
         })
 })
+
+
+test('follow me', t => {
+    client.followMe(keys, process.env.TEST_PW)
+        .then(() => {
+            t.pass('should get an ok response')
+            t.end()
+        })
+        .catch(err => {
+            console.log('errrr', err)
+            t.fail(err)
+            t.end()
+        })
+})
+
 
 test('all done', function (t) {
     ntl.kill()

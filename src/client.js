@@ -21,5 +21,22 @@ module.exports = {
 
                 return res.json()
             })
+    },
+
+    followMe: function (keys, password) {
+        return fetch(BASE_URL + '/.netlify/functions/follow-me', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                user: '@' + keys.public,
+                password
+            })
+        })
+            .then(async res => {
+                if (!res.ok) throw new Error(await res.text())
+                return res.json()
+            })
     }
 }

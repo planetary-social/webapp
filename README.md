@@ -15,6 +15,8 @@ Trying netlify
 * https://planetary-webapp.netlify.app/
 
 ## environment
+The variable "TEST_PW" is used for testing invitations.
+
 ```
 FAUNADB_SERVER_SECRET="123"
 FAUNADB_SERVER_SECRET_TEST="123"
@@ -22,6 +24,7 @@ CLOUDINARY_CLOUD_NAME="https-www-planetary-social"
 CLOUDINARY_URL="cloudinary://123"
 CLOUDINARY_API_SECRET="123"
 CLOUDINARY_API_KEY="123"
+TEST_PW="123"
 ```
 
 ## lambda functions
