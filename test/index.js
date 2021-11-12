@@ -60,13 +60,24 @@ test('follow me', t => {
     client.followMe(keys, process.env.TEST_PW)
         .then(() => {
             t.pass('should get an ok response')
-            t.end()
+        })
+        .then(() => {
+            client.followMe(ssc.createKeys(), 'bad password')
+                .then(() => {
+                    t.fail('should get an error response if the password is bad')
+                    t.end()
+                })
+                .catch(err => {
+                    t.pass('should return an error for bad password')
+                    t.end()
+                })
         })
         .catch(err => {
             console.log('errrr', err)
             t.fail(err)
             t.end()
         })
+
 })
 
 
