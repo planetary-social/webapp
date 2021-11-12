@@ -2,8 +2,10 @@ let cloudinary = require("cloudinary").v2;
 var faunadb = require('faunadb')
 var ssc = require('@nichoth/ssc')
 var createHash = require('./create-hash')
-var sscBlobs = require('@planetary-ssb/ssc-blobs')
-var writeBlob = sscBlobs.cloudinary.write
+// var sscBlobs = require('@planetary-ssb/ssc-blobs')
+// var writeBlob = sscBlobs.cloudinary.write
+var { getUrl, write } = require('@planetary-ssb/ssc-blobs/cloudinary')
+var writeBlob = write
 var writeMsg = require('@nichoth/ssc-fauna/write-msg')
 
 cloudinary.config({ 
@@ -126,6 +128,6 @@ exports.handler = function (ev, ctx, cb) {
     }
 
     function getUrls (mentions) {
-        return mentions.map(m => cloudinary.url(m))
+        return mentions.map(m => getUrl(cloudinary, m))
     }
 }
