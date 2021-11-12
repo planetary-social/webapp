@@ -115,7 +115,7 @@ exports.handler = function (ev, ctx, cb) {
             Promise.all(files.map(file => {
                 return writeBlob(cloudinary, file)
             })),
-            writeMsg(keys, msg, (m => cloudinary.url(m)))
+            writeMsg(keys, msg, getUrls)
         ])
             .then(arr => {
                 return arr[1]
@@ -125,4 +125,7 @@ exports.handler = function (ev, ctx, cb) {
             })
     }
 
+    function getUrls (mentions) {
+        return mentions.map(m => cloudinary.url(m))
+    }
 }
