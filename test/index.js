@@ -43,8 +43,7 @@ test('post', t => {
 
     client.post({ public: keys.public }, msg, [ base64Caracal ])
         .then(res => {
-            console.log('res', res)
-            t.fail("should get an error if we're not following them")
+            t.fail("should get an error b/c we're not following them")
             t.end()
         })
         .catch (err => {
@@ -54,7 +53,6 @@ test('post', t => {
             t.end()
         })
 })
-
 
 test('follow me', t => {
     client.followMe(keys, process.env.TEST_PW)
@@ -67,7 +65,7 @@ test('follow me', t => {
                     t.fail('should get an error response if the password is bad')
                     t.end()
                 })
-                .catch(err => {
+                .catch((err) => {
                     t.pass('should return an error for bad password')
                     t.end()
                 })
@@ -78,6 +76,25 @@ test('follow me', t => {
             t.end()
         })
 
+})
+
+test('post', t => {
+    var msg = ssc.createMsg(keys, null, {
+        type: 'test',
+        text: 'wooo',
+        mentions: [createHash(base64Caracal)]
+    })
+
+    client.post(keys, msg, [ base64Caracal ])
+        .then(() => {
+            t.pass('should post a new message')
+            t.end()
+        })
+        .catch ((err) => {
+            console.log('errrr', err)
+            t.fail('should not get an error')
+            t.end()
+        })
 })
 
 

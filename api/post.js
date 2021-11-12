@@ -42,7 +42,6 @@ exports.handler = function (ev, ctx, cb) {
         })
     }
 
-
     var isValid
     try {
         isValid = (ssc.verifyObj(keys, null, msg) &&
@@ -81,7 +80,7 @@ exports.handler = function (ev, ctx, cb) {
     )
         .then(() => {
             // post the stuff
-            write(msg)
+            write(msg, files)
                 .then(res => {
                     cb(null, {
                         statusCode: 200,
@@ -108,9 +107,11 @@ exports.handler = function (ev, ctx, cb) {
 
 
 
-    function write (msg) {
+    function write (msg, files) {
         return Promise.all([
-            writeBlob(cloudinary, base64Caracal),
+            Promise.all(files.map(file => {
+                return writeBlob(cloudinary, file)
+            })),
             writeMsgToDB(msg).then(res => {
                 return res
             })

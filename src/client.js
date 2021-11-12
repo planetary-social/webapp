@@ -30,7 +30,7 @@ module.exports = {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                user: '@' + keys.public,
+                userId: keys.id,
                 password
             })
         })
