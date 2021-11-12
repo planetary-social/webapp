@@ -101,3 +101,24 @@ test('post', t => {
         })
 })
 ```
+
+#### client.getRelevantPosts
+Get a single page of messages that are within your view, ordered by post-time.
+
+```js
+test('get relvant posts', t => {
+    client.getRelevantPosts(keys.id)
+        .then(res => {
+            t.equal(res.msg[0].value.author, keys.id,
+                'should return your message')
+            t.equal(ssc.getId(res.msg[0].value), res.msg[0].key,
+                'should return the expected message')
+            t.end()
+        })
+        .catch(err => {
+            t.fail(err.toString())
+            t.end()
+        }) 
+})
+```
+

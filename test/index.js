@@ -93,10 +93,25 @@ test('post', t => {
             t.end()
         })
         .catch ((err) => {
-            console.log('errrr', err)
             t.fail('should not get an error')
+            console.log('**err**', err)
             t.end()
         })
+})
+
+test('get relvant posts', t => {
+    client.getRelevantPosts(keys.id)
+        .then(res => {
+            t.equal(res.msg[0].value.author, keys.id,
+                'should return your message')
+            t.equal(ssc.getId(res.msg[0].value), res.msg[0].key,
+                'should return the expected message')
+            t.end()
+        })
+        .catch(err => {
+            t.fail(err.toString())
+            t.end()
+        }) 
 })
 
 

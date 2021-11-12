@@ -38,5 +38,21 @@ module.exports = {
                 if (!res.ok) throw new Error(await res.text())
                 return res.json()
             })
+    },
+
+    getRelevantPosts: function (userId) {
+        var qs = new URLSearchParams({
+            userId: userId,
+            foafs: true
+        }).toString()
+
+        var url = (BASE_URL + '/.netlify/functions/relevant-posts' +
+            '?' + qs)
+
+        return fetch(url)
+            .then(res => {
+                if (!res.ok) return res.text()
+                return res.json()
+            })
     }
 }
