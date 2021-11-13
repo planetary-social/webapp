@@ -4,8 +4,7 @@ var ssc = require('@nichoth/ssc')
 var createHash = require('./create-hash')
 // var sscBlobs = require('@planetary-ssb/ssc-blobs')
 // var writeBlob = sscBlobs.cloudinary.write
-var { getUrl, write } = require('@planetary-ssb/ssc-blobs/cloudinary')
-var writeBlob = write
+var BlobClient = require('@planetary-ssb/ssc-blobs/cloudinary')
 var writeMsg = require('@nichoth/ssc-fauna/write-msg')
 
 cloudinary.config({ 
@@ -13,6 +12,8 @@ cloudinary.config({
     api_key: process.env.CLOUDINARY_API_KEY,
     api_secret: process.env.CLOUDINARY_API_SECRET
 });
+
+var blobClient = BlobClient(cloudinary)
 
 // requests are like
 // { keys: { public }, msg: {} }
@@ -115,7 +116,7 @@ exports.handler = function (ev, ctx, cb) {
     function write (msg, files) {
         return Promise.all([
             Promise.all(files.map(file => {
-                return writeBlob(cloudinary, file)
+                return blobClient.write(file)
             })),
             writeMsg(keys, msg, getUrls)
         ])
@@ -128,6 +129,6 @@ exports.handler = function (ev, ctx, cb) {
     }
 
     function getUrls (mentions) {
-        return mentions.map(m => getUrl(cloudinary, m))
+        return mentions.map(m => blobClient.getUrl(m))
     }
 }
