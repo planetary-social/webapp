@@ -11,6 +11,8 @@
     "watch-sass": "sass --watch src/style/main.scss public/style.css",
     "build-js": "browserify -p esmify -t envify -t uglifyify --debug src/index.js > public/bundle.js",
     "watch-js": "watchify -p esmify -t envify -t uglifyify --debug src/index.js -o public/bundle.js",
+    "test-cypress": "NODE_ENV=test env $(cat .env | xargs) concurrently --kill-others \"npm start\" \"cypress open\"",
+    "cypress-test": "",
     "test": "NODE_ENV=test tape test/*.js | tap-spec"
   },
   "repository": {
@@ -26,6 +28,7 @@
   "devDependencies": {
     "browserify": "^17.0.0",
     "concurrently": "^6.3.0",
+    "cypress": "^9.0.0",
     "envify": "^4.1.0",
     "esmify": "^2.1.1",
     "netlify-cli": "^6.14.19",

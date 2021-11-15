@@ -114,7 +114,6 @@ test('get relvant posts', t => {
         }) 
 })
 
-
 test('all done', function (t) {
     ntl.kill()
     t.end()

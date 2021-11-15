@@ -15,4 +15,3 @@ exports.handler = function (ev, ctx, cb) {
 //     cookies: req.cookies,
 //   });
 // }
-
