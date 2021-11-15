@@ -3,18 +3,32 @@ var Bus = require('@nichoth/events')
 var observ = require('observ')
 var struct = require('observ-struct')
 var evs = require('./EVENTS')
+import { html } from 'htm/preact'
+var route = require('route-event')()
 
-module.exports = function loop () {
+module.exports = function Loop () {
     var state = State()
     var bus = Bus({ memo: true })
     Subscribe(bus, state)
 
-    return { bus, state }
+    // this get called immediately
+    route(function onChange (path) {
+        state.routePath.set(path)
+    })
+
+    function loop ({ children }) {
+        return html`<div class="planetary">
+            ${children}
+        </div>`
+    }
+
+    return { bus, state, loop }
 }
 
 function State () {
     return struct({
-        foo: observ('bar')
+        foo: observ('bar'),
+        routePath: observ(null)
     })
 }
 
