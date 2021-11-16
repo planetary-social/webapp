@@ -3,6 +3,8 @@ $medium: #271f34;
 $mainColor: #211a2d;
 $highlight: #c33d79;
 
+@use "./profile";
+@use "./site-header";
 
 body {
     background-color: $mainColor;
@@ -20,6 +22,12 @@ button {
 }
 
 .planetary {
+    --transition-time: 0.6s;
+
+    a {
+        text-decoration: none;
+    }
+
     header {
         background-color: $darker;
         display: flex;
@@ -42,10 +50,7 @@ button {
         margin-top: 1rem;
     }
 
-    a.create-acct {
-        // background: linear-gradient(red, orange);
-        // background: linear-gradient(#e7346b, #8373e9);
-
+    .cool-btn {
         background: linear-gradient(
             71.56deg,
             #8474EA 19.94%,
@@ -82,5 +87,13 @@ button {
                 color: $highlight;
             }
         }
+    }
+
+    .form-controls {
+        text-align: right;
+    }
+
+    .content-view {
+        margin: 1rem;
     }
 }

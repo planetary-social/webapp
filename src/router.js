@@ -1,6 +1,6 @@
 var _router = require('ruta3')
 var Home = require('./view/home')
-var Create = require('./view/create')
+var Profile = require('./view/profile')
 
 function Router () {
     var router = _router()
@@ -9,8 +9,8 @@ function Router () {
         return { view: Home }
     })
 
-    router.addRoute('/create', () => {
-        return { view: Create }
+    router.addRoute('/profile', () => {
+        return { view: Profile }
     })
 
     return router

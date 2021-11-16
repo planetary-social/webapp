@@ -1,0 +1,12 @@
+.planetary {
+    .site-header {
+        h1 {
+            & > a {
+                transition: all var(--transition-time);
+                &:hover {
+                    filter: brightness(2.5) drop-shadow(2px 4px 6px black);
+                }
+            }
+        }
+    }
+}

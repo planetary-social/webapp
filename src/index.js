@@ -3,14 +3,13 @@ import { render } from 'preact'
 var Loop = require('./loop')
 var Router = require('./router')
 var Profile = require('./profile')
+var { PROFILE_STORAGE_KEY } = require('./CONSTANTS')
 
-const STORAGE_KEY = 'planetary-profile'
-
-// @TODO
-// use localStorage to save profile
-var profile = Profile(STORAGE_KEY)
+var profile = Profile(PROFILE_STORAGE_KEY)
 
 var { bus, state, loop, setRoute } = Loop({ profile: profile.get() })
+var emit = bus.emit.bind(bus)
+
 var router = Router()
 
 // this gets called when the page loads for initial render,
@@ -18,7 +17,10 @@ var router = Router()
 // setting the state right away
 state(function onChange (newState) {
     var { routePath } = newState
-    if (!newState.profile && routePath !== '/' && routePath !== '/create') {
+    var redirect = (!newState.profile &&
+        (routePath !== '/' && routePath !== '/profile'))
+
+    if (redirect) {
         return setRoute('/')
     }
 
@@ -35,6 +37,6 @@ state(function onChange (newState) {
 
     // re-render the app whenever the state change
     render(html`<${loop} state=${newState}>
-        <${routeView} ...${params} ...${newState} />
+        <${routeView} ...${params} ...${newState} emit=${emit} />
     <//>`, document.getElementById('content'))
 })

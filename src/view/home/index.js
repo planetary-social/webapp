@@ -10,7 +10,6 @@ const TAGS = [
 ]
 
 function HomeView (props) {
-    console.log('render', props)
     var { profile } = props
     return html`
         <${HeadPart} />
@@ -44,7 +43,7 @@ function JoinToday () {
 }
 
 function CreateAcct () {
-    return html`<a class="create-acct" href="/create">
+    return html`<a class="cool-btn create-acct" href="/profile">
         Create your account
     </a>`
 }

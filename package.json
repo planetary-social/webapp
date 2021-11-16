@@ -40,6 +40,7 @@
   },
   "dependencies": {
     "@nichoth/events": "^1.1.2",
+    "@nichoth/forms": "^0.0.28",
     "@nichoth/ssc": "^0.0.18",
     "@nichoth/ssc-fauna": "^0.0.51",
     "@planetary-ssb/ssc-blobs": "^0.2.0",
