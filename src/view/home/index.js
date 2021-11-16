@@ -10,18 +10,24 @@ const TAGS = [
     { tag: '#LaserEyesTill100k', count: 581 }
 ]
 
-function AnonymousView (props) {
+function HomeView (props) {
+    var { profile } = props
     return html`
         <${HeadPart} />
-    
+        ${profile ? '' : html`<${AnonymousView} />`}
+    `
+}
+
+module.exports = HomeView
+
+function AnonymousView () {
+    return html`
         <${Block}>
             <${JoinToday} />
             <${Hotness} tags=${TAGS} />
         <//>
     `
 }
-
-module.exports = { AnonymousView }
 
 function HeadPart (props) {
     return html`<header class="site-header">
