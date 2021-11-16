@@ -1,7 +1,6 @@
 import { html } from 'htm/preact'
-var AppStore = require('./app-store')
-var Logo = require('./logo')
 var Block = require('./block')
+var HeadPart = require('../head-part')
 
 const TAGS = [
     { tag: '#CyberPunkRevolution', count: 1768 },
@@ -11,6 +10,7 @@ const TAGS = [
 ]
 
 function HomeView (props) {
+    console.log('render', props)
     var { profile } = props
     return html`
         <${HeadPart} />
@@ -26,14 +26,6 @@ function AnonymousView () {
             <${JoinToday} />
             <${Hotness} tags=${TAGS} />
         <//>
-    `
-}
-
-function HeadPart (props) {
-    return html`<header class="site-header">
-        <h1><${Logo} /> Planetary</h1>
-        <a href="/"><${AppStore} /></a>
-    </header>
     `
 }
 

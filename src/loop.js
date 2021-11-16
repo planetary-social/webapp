@@ -6,8 +6,11 @@ var evs = require('./EVENTS')
 import { html } from 'htm/preact'
 var route = require('route-event')()
 
-module.exports = function Loop () {
-    var state = State()
+module.exports = function Loop (initState) {
+    var init = (initState && initState.profile) ?
+        { profile: initState.profile } :
+        null
+    var state = State(init)
     var bus = Bus({ memo: true })
     Subscribe(bus, state)
 
@@ -25,8 +28,9 @@ module.exports = function Loop () {
     return { bus, state, loop, setRoute: route.setRoute }
 }
 
-function State () {
+function State (initState) {
     return struct({
+        profile: observ((initState && initState.profile) || null),
         foo: observ('bar'),
         routePath: observ(null)
     })
