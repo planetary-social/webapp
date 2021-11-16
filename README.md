@@ -48,6 +48,20 @@ This will test the API functions, but only on your local machine. However, it do
 ### src/client.js
 This is a module that works in browsers or node, because it uses 'isomorphic-fetch'. It makes http calls to the backend, either hosted locally or via netlify.
 
+```js
+require('dotenv').config()
+// `client` requires some env vars
+// FAUNADB_SERVER_SECRET="fnAEXtDjCoACQPYVjES3is6I1thIGlPqHMz86Z1J"
+// CLOUDINARY_URL=cloudinary://...
+// CLOUDINARY_CLOUD_NAME="https-www-planetary-social"
+// CLOUDINARY_API_SECRET="123"
+// CLOUDINARY_API_KEY="123"
+
+var client = require('../src/client')
+client.post({ public: keys.public }, msg, [ myBlobInBase64 ])
+    .then(/*...*/)
+```
+
 #### client.followMe
 Tell the server to follow a user. It requires a password. The server must be 'following' you in oder to write to the DB.
 

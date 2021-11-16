@@ -2,6 +2,8 @@ import { html } from 'htm/preact'
 import { render } from 'preact'
 var Loop = require('./loop')
 
+// use localStorage to save profile
+
 var { bus, state, loop, setRoute } = Loop()
 
 const TAGS = [
@@ -13,20 +15,28 @@ const TAGS = [
 
 state(function onChange (newState) {
     render(html`<${loop} state=${newState}>
-        <${headPart} />
+        <${AnonymousView} />
     <//>`, document.getElementById('content'))
 })
+
+// --------------------------------------------
+
+function AnonymousView (props) {
+    return html`
+        <${headPart} />
+    
+        <${Block}>
+            <${JoinToday} />
+            <${Hotness} tags=${TAGS} />
+        <//>
+    `
+}
 
 function headPart (props) {
     return html`<header class="site-header">
         <h1>{logo} Planetary</h1>
         <a href="/">{link to app store}</a>
     </header>
-    
-    <${Block}>
-        <${JoinToday} />
-        <${Hotness} tags=${TAGS} />
-    <//>
     `
 }
 

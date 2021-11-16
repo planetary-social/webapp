@@ -12,6 +12,7 @@ body {
     }
     margin: 0;
     font-family: sans-serif;
+    // font-family: SF Pro Text;
 }
 
 button {
@@ -44,10 +45,17 @@ button {
     a.create-acct {
         // background: linear-gradient(red, orange);
         // background: linear-gradient(#e7346b, #8373e9);
+
         background: linear-gradient(
-            to bottom left, 
-            #e7346b, #7c67ff
+            71.56deg,
+            #8474EA 19.94%,
+            #FF264E 108.46%
         );
+
+        // background: linear-gradient(
+        //     to bottom left, 
+        //     #e7346b, #7c67ff
+        // );
         display: block;
         border-radius: 30px;
         padding: 1rem;
