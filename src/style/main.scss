@@ -1,8 +1,78 @@
+$darker: #2a233b;
+$medium: #271f34;
+$mainColor: #211a2d;
+$highlight: #c33d79;
+
+
 body {
-    background-color: #211a2d;
+    background-color: $mainColor;
     color: white;
+    a {
+        color: white;
+    }
+    margin: 0;
+    font-family: sans-serif;
 }
 
 button {
     cursor: pointer;
+}
+
+.planetary {
+    header {
+        background-color: $darker;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 1rem;
+
+        h1 {
+            font-size: 1.5rem;
+        }
+    }
+
+    .join-today {
+        width: 100%;
+        max-width: 26rem;
+        background-color: $medium;
+        border-radius: 14px;
+        padding: 1rem;
+        margin: 0 auto;
+        margin-top: 1rem;
+    }
+
+    a.create-acct {
+        // background: linear-gradient(red, orange);
+        // background: linear-gradient(#e7346b, #8373e9);
+        background: linear-gradient(
+            to bottom left, 
+            #e7346b, #7c67ff
+        );
+        display: block;
+        border-radius: 30px;
+        padding: 1rem;
+        text-align: center;
+        text-decoration: none;
+        max-width: 16rem;
+        margin: 0 auto;
+        transition: 0.6s all;
+
+        &:hover {
+            filter: brightness(1.5) drop-shadow(2px 4px 6px black);
+            // filter: blur(1px) drop-shadow(2px 4px 6px black);
+        }
+    }
+
+    .hot-hashtags {
+        list-style: none;
+        padding: 0;
+
+        li {
+            margin-bottom: 0.5rem;
+            a {
+                margin-right: 1rem;
+                color: $highlight;
+            }
+        }
+    }
 }
