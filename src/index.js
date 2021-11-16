@@ -20,6 +20,8 @@ state(function onChange (newState) {
     var redirect = (!newState.profile &&
         (routePath !== '/' && routePath !== '/profile'))
 
+    console.log('redir', redirect)
+
     if (redirect) {
         return setRoute('/')
     }

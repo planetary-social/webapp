@@ -4,16 +4,19 @@ var HeadPart = require('../head-part')
 var evs = require('../../EVENTS')
 
 function Profile (props) {
-    console.log('props', props)
     var { profile } = props
-    return props.profile ?
-        html`
+    console.log('props', props)
+
+    if (profile) {
+        return html`
             <${HeadPart} />
             <div class="pl-profile content-view">
                 <p>${profile.name}</p>
             </div>
-        ` :
-        html`<${Create} ...${props} >`
+        `
+    }
+
+    return html`<${Create} ...${props} />`
 }
 
 function Create ({ emit }) {
