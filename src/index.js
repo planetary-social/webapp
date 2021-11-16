@@ -2,7 +2,14 @@ import { html } from 'htm/preact'
 import { render } from 'preact'
 var Loop = require('./loop')
 
-var { bus, state, loop } = Loop()
+var { bus, state, loop, setRoute } = Loop()
+
+const TAGS = [
+    { tag: '#CyberPunkRevolution', count: 1768 },
+    { tag: '#BlackLivesMatter', count: 745 },
+    { tag: '#FreeBritneyNow', count: 692 },
+    { tag: '#LaserEyesTill100k', count: 581 }
+]
 
 state(function onChange (newState) {
     render(html`<${loop} state=${newState}>
@@ -16,16 +23,18 @@ function headPart (props) {
         <a href="/">{link to app store}</a>
     </header>
     
-    <${JoinToday} />
+    <${Block}>
+        <${JoinToday} />
+        <${Hotness} tags=${TAGS} />
+    <//>
     `
 }
 
-const TAGS = [
-    { tag: '#CyberPunkRevolution', count: 1768 },
-    { tag: '#BlackLivesMatter', count: 745 },
-    { tag: '#FreeBritneyNow', count: 692 },
-    { tag: '#LaserEyesTill100k', count: 581 }
-]
+function Block ({ children }) {
+    return html`<div class="pl-block">
+        ${children}
+    </div>`
+}
 
 function JoinToday () {
     return html`<div class="join-today">
@@ -33,18 +42,17 @@ function JoinToday () {
         <p>
             Planetary is a decentralized network for people who want to
             come together and connect even when the internet goes out.
-
         </p>
+
         <p>It's an app that doesn't keep your data in the cloud.</p>
 
         <${CreateAcct} />
-        <${Hotness} tags=${TAGS} />
     </div>`
 }
 
 function CreateAcct () {
     return html`<a class="create-acct" href="/create">
-        Create your PRO account
+        Create your account
     </a>`
 }
 

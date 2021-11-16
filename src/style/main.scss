@@ -31,12 +31,12 @@ button {
         }
     }
 
-    .join-today {
+    .pl-block {
+        background-color: $medium;
+        padding: 1rem;
+        border-radius: 14px;
         width: 100%;
         max-width: 26rem;
-        background-color: $medium;
-        border-radius: 14px;
-        padding: 1rem;
         margin: 0 auto;
         margin-top: 1rem;
     }

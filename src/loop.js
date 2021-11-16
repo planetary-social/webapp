@@ -22,7 +22,7 @@ module.exports = function Loop () {
         </div>`
     }
 
-    return { bus, state, loop }
+    return { bus, state, loop, setRoute: route.setRoute }
 }
 
 function State () {
