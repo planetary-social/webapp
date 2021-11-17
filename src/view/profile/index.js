@@ -5,18 +5,30 @@ var evs = require('../../EVENTS')
 
 function Profile (props) {
     var { profile } = props
-    console.log('props', props)
 
     if (profile) {
         return html`
             <${HeadPart} />
-            <div class="pl-profile content-view">
-                <p>${profile.name}</p>
-            </div>
+            <${ProfileView} profile=${profile} />
         `
     }
 
     return html`<${Create} ...${props} />`
+}
+
+function Invitation () {
+    return html`<div class="invitation">
+
+    </div>`
+}
+
+function ProfileView ({ profile }) {
+    return html`<div class="pl-profile content-view">
+        <dl>
+            <dt>your name</dt>
+            <dd>${profile.name}</dd>
+        </dl>
+    </div>`
 }
 
 function Create ({ emit }) {
@@ -30,8 +42,6 @@ function Create ({ emit }) {
 
         <div class="pl-create">
             <h2>Create an account</h2>
-
-            <p>This will create an identity</p>
 
             <form class="acct-form" onsubmit=${createAcct}>
                 <${TextInput} name="username" displayName="name" required />

@@ -46,7 +46,7 @@ This will test the API functions, but only on your local machine. However, it do
 ## examples
 
 ### src/client.js
-This is a module that works in browsers or node, because it uses 'isomorphic-fetch'. It makes http calls to the backend, either hosted locally or via netlify.
+This is a module that works in browsers or node, because it uses `isomorphic-fetch`. It makes http calls to the backend, either hosted locally or via netlify.
 
 ```js
 require('dotenv').config()
@@ -135,4 +135,25 @@ test('get relvant posts', t => {
         }) 
 })
 ```
+
+----------------------------------------------
+
+[pinata](https://medium.com/pinata/how-to-easily-host-a-website-on-ipfs-9d842b5d6a01)
+
+[pinata medium](https://medium.com/pinata/the-ipfs-gateway-problem-64bbe7eb8170)
+
+-------------------------------
+
+[How to Deploy an IPFS Node on Digital Ocean](https://medium.com/pinata/how-to-deploy-an-ipfs-node-on-digital-ocean-c59b9e83098e)
+
+--------------------------------
+
+[cloudflare ipfs gateway](https://blog.cloudflare.com/distributed-web-gateway/)
+
+[cloudlfare -- setting up a server](https://developers.cloudflare.com/distributed-web/ipfs-gateway/setting-up-a-server)
+
+--------------------------------
+
+[ipfs -- ipfs gateway](https://github.com/ipfs/go-ipfs/blob/master/docs/gateway.md)
+
 
