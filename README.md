@@ -138,9 +138,9 @@ test('get relvant posts', t => {
 
 ----------------------------------------------
 
-[pinata](https://medium.com/pinata/how-to-easily-host-a-website-on-ipfs-9d842b5d6a01)
+[pinata - how-to-easily-host-a-website](https://medium.com/pinata/how-to-easily-host-a-website-on-ipfs-9d842b5d6a01)
 
-[pinata medium](https://medium.com/pinata/the-ipfs-gateway-problem-64bbe7eb8170)
+[pinata medium - the ipfs gateway problem](https://medium.com/pinata/the-ipfs-gateway-problem-64bbe7eb8170)
 
 -------------------------------
 
@@ -150,10 +150,12 @@ test('get relvant posts', t => {
 
 [cloudflare ipfs gateway](https://blog.cloudflare.com/distributed-web-gateway/)
 
+**
 [cloudlfare -- setting up a server](https://developers.cloudflare.com/distributed-web/ipfs-gateway/setting-up-a-server)
+**
 
 --------------------------------
 
-[ipfs -- ipfs gateway](https://github.com/ipfs/go-ipfs/blob/master/docs/gateway.md)
+[ipfs gateway](https://github.com/ipfs/go-ipfs/blob/master/docs/gateway.md)
 
 
