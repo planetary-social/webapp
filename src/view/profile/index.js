@@ -16,12 +16,6 @@ function Profile (props) {
     return html`<${Create} ...${props} />`
 }
 
-function Invitation () {
-    return html`<div class="invitation">
-
-    </div>`
-}
-
 function ProfileView ({ profile }) {
     return html`<div class="pl-profile content-view">
         <dl>
@@ -31,7 +25,9 @@ function ProfileView ({ profile }) {
     </div>`
 }
 
-function Create ({ emit }) {
+function Create (props) {
+    var { emit, setRoute } = props
+
     function createAcct (ev) {
         ev.preventDefault()
         emit(evs.profile.create, ev.target.elements.username.value)
@@ -44,7 +40,9 @@ function Create ({ emit }) {
             <h2>Create an account</h2>
 
             <form class="acct-form" onsubmit=${createAcct}>
-                <${TextInput} name="username" displayName="name" required />
+                <${TextInput} name="username" displayName="Name" required />
+                <${TextInput} name="code" displayName="Invitation code"
+                    required />
                 <div class="form-controls">
                     <${Button} type="submit">Create a profile<//>
                 </div>

@@ -37,6 +37,8 @@ state(function onChange (newState) {
 
     // re-render the app whenever the state change
     render(html`<${loop} state=${newState}>
-        <${routeView} ...${params} ...${newState} emit=${emit} />
+        <${routeView} ...${params} ...${newState} emit=${emit}
+            setRoute=${setRoute}
+        />
     <//>`, document.getElementById('content'))
 })

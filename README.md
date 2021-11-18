@@ -136,7 +136,7 @@ test('get relvant posts', t => {
 })
 ```
 
-----------------------------------------------
+## reading
 
 [pinata - how-to-easily-host-a-website](https://medium.com/pinata/how-to-easily-host-a-website-on-ipfs-9d842b5d6a01)
 
@@ -151,6 +151,7 @@ test('get relvant posts', t => {
 [cloudflare ipfs gateway](https://blog.cloudflare.com/distributed-web-gateway/)
 
 **
+Read this
 [cloudlfare -- setting up a server](https://developers.cloudflare.com/distributed-web/ipfs-gateway/setting-up-a-server)
 **
 

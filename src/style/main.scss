@@ -26,6 +26,17 @@ button {
 
     a {
         text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    h1 {
+        a {
+            &:hover {
+                text-decoration: none;
+            }
+        }
     }
 
     header {
