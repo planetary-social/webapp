@@ -43,15 +43,21 @@ function Subscribe (bus, state) {
     var profile = Profile(PROFILE_STORAGE_KEY)
 
     bus.on(evs.profile.create, (ev) => {
-        var { username, code } = ev
+        var { username, code, file } = ev
         console.log('create', ev)
-        var p = profile.create(username)
-        profile.save(p)
+        var p = profile.create(username, file)
+        console.log('ppppppp cr', p)
         // state.profile.set(p)
         // followMe: function (keys, password) {
         client.followMe(p.keys, code)
             .then(res => {
-                state.profile
+                console.log('aaaaa', res)
+                return res
+            })
+            .then(() => client.saveProfile(p.msg))
+            .then(res => {
+                console.log('saved profile', res)
+                profile.save(p)
             })
     })
 }

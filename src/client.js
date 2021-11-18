@@ -26,9 +26,7 @@ module.exports = {
     followMe: function (keys, password) {
         return fetch(BASE_URL + '/.netlify/functions/follow-me', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 userId: keys.id,
                 password
@@ -55,6 +53,22 @@ module.exports = {
                 return res.json()
             })
     },
+
+    saveProfile: function (keys, file, msg) {
+        return fetch(BASE_URL + '/.netlify/functions/profile', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                userId: keys.id,
+                file,
+                msg  // msg 
+            })
+        })
+            .then(res => {
+                if (!res.ok) return res.text()
+                return JSON.parse(res)
+            })
+    }
 
     // redeemInvitation: function (userId, profile, code) {
     //     return fetch(BASE_URL + '/.netlify/function/redeem-invitation', {

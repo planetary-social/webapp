@@ -65,14 +65,14 @@ test('follow me', t => {
                     t.fail('should get an error response if the password is bad')
                     t.end()
                 })
-                .catch((err) => {
+                .catch(() => {
                     t.pass('should return an error for bad password')
                     t.end()
                 })
         })
         .catch(err => {
             console.log('errrr', err)
-            t.fail(err)
+            t.fail(err.toString())
             t.end()
         })
 

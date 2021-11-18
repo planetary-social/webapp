@@ -1,4 +1,5 @@
 var ssc = require('@nichoth/ssc')
+var createHash = require('./create-hash')
 
 function Profile (key) {
     return {
@@ -12,11 +13,16 @@ function Profile (key) {
             return lsItem ? JSON.parse(lsItem) : null
         },
 
-        create: function (name) {
+        create: function (name, file) {
             const keys = ssc.createKeys();
+            var profileMsg = ssc.createMsg(keys, null, {
+                type: 'profile',
+                name: name,
+                avatar: file ? createHash(file) : null
+            })
 
             return {
-                name,
+                msg: profileMsg,
                 keys
             }
         }

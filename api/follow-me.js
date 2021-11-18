@@ -23,6 +23,9 @@ exports.handler = function (ev, ctx, cb) {
 
     var { password, userId } = req
 
+    console.log('pwds', pwds)
+    console.log('password', password)
+
     followMe(pwds, password, userId)
         .then(res => {
             cb(null, {
