@@ -150,10 +150,8 @@ test('get relvant posts', t => {
 
 [cloudflare ipfs gateway](https://blog.cloudflare.com/distributed-web-gateway/)
 
-**
-Read this
+**Read this**
 [cloudlfare -- setting up a server](https://developers.cloudflare.com/distributed-web/ipfs-gateway/setting-up-a-server)
-**
 
 --------------------------------
 

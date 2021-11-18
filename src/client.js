@@ -56,19 +56,19 @@ module.exports = {
             })
     },
 
-    redeemInvitation: function (userId, profile, code) {
-        return fetch(BASE_URL + '/.netlify/function/redeem-invitation', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                userId,
-                code,
-                profile
-            })
-        })
-            .then(res => {
-                if (!res.ok) return res.text()
-                return res.json()
-            })
-    }
+    // redeemInvitation: function (userId, profile, code) {
+    //     return fetch(BASE_URL + '/.netlify/function/redeem-invitation', {
+    //         method: 'POST',
+    //         headers: { 'Content-Type': 'application/json' },
+    //         body: JSON.stringify({
+    //             userId,
+    //             code,
+    //             profile
+    //         })
+    //     })
+    //         .then(res => {
+    //             if (!res.ok) return res.text()
+    //             return res.json()
+    //         })
+    // }
 }

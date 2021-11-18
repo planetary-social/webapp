@@ -7,6 +7,7 @@ import { html } from 'htm/preact'
 var route = require('route-event')()
 var Profile = require('./profile')
 var { PROFILE_STORAGE_KEY } = require('./CONSTANTS')
+var client = require('./client')
 
 module.exports = function Loop (initState) {
     var init = (initState && initState.profile) ?
@@ -41,9 +42,16 @@ function State (initState) {
 function Subscribe (bus, state) {
     var profile = Profile(PROFILE_STORAGE_KEY)
 
-    bus.on(evs.profile.create, (name) => {
-        var p = profile.create(name)
+    bus.on(evs.profile.create, (ev) => {
+        var { username, code } = ev
+        console.log('create', ev)
+        var p = profile.create(username)
         profile.save(p)
-        state.profile.set(p)
+        // state.profile.set(p)
+        // followMe: function (keys, password) {
+        client.followMe(p.keys, code)
+            .then(res => {
+                state.profile
+            })
     })
 }

@@ -42,7 +42,7 @@
     "@nichoth/events": "^1.1.2",
     "@nichoth/forms": "^0.0.28",
     "@nichoth/ssc": "^0.0.18",
-    "@nichoth/ssc-fauna": "^0.0.51",
+    "@nichoth/ssc-fauna": "^0.0.52",
     "@planetary-ssb/ssc-blobs": "^0.2.0",
     "bcrypt": "^5.0.1",
     "blake2s-js": "^1.3.0",

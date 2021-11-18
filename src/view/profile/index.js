@@ -30,7 +30,11 @@ function Create (props) {
 
     function createAcct (ev) {
         ev.preventDefault()
-        emit(evs.profile.create, ev.target.elements.username.value)
+        var values = ['username', 'code'].reduce((acc, val) => {
+            acc[val] = ev.target.elements[val].value
+            return acc
+        }, {})
+        emit(evs.profile.create, values)
     }
 
     return html`
