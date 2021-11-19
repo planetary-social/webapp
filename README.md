@@ -157,4 +157,3 @@ test('get relvant posts', t => {
 
 [ipfs gateway](https://github.com/ipfs/go-ipfs/blob/master/docs/gateway.md)
 
-
