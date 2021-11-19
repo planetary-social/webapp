@@ -5,6 +5,7 @@ $highlight: #c33d79;
 
 @use "./profile";
 @use "./site-header";
+@use "./feed";
 
 body {
     background-color: $mainColor;

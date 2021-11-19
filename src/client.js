@@ -66,7 +66,7 @@ module.exports = {
         })
             .then(res => {
                 if (!res.ok) return res.text()
-                return JSON.parse(res)
+                return res.json()
             })
     }
 

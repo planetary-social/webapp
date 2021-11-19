@@ -7,7 +7,7 @@ exports.handler = function (ev, ctx, cb) {
     if (ev.httpMethod !== 'POST') {
         return cb(null, {
             statusCode: 400,
-            body: (new Error('should be a post request')).toString()
+            body: (new Error('should be a POST request')).toString()
         })
     }
 
@@ -22,9 +22,6 @@ exports.handler = function (ev, ctx, cb) {
     }
 
     var { password, userId } = req
-
-    console.log('pwds', pwds)
-    console.log('password', password)
 
     followMe(pwds, password, userId)
         .then(res => {

@@ -35,6 +35,7 @@ module.exports = function Loop (initState) {
 function State (initState) {
     return struct({
         profile: observ((initState && initState.profile) || null),
+        feed: observ(null),
         routePath: observ(null)
     })
 }
@@ -44,20 +45,27 @@ function Subscribe (bus, state) {
 
     bus.on(evs.profile.create, (ev) => {
         var { username, code, file } = ev
-        console.log('create', ev)
         var p = profile.create(username, file)
-        console.log('ppppppp cr', p)
+        var { keys, msg } = p
         // state.profile.set(p)
         // followMe: function (keys, password) {
-        client.followMe(p.keys, code)
+        client.followMe(keys, code)
             .then(res => {
-                console.log('aaaaa', res)
                 return res
             })
-            .then(() => client.saveProfile(p.msg))
-            .then(res => {
-                console.log('saved profile', res)
+            .then(() => client.saveProfile(keys, null, msg))
+            .then(() => {
                 profile.save(p)
+                state.profile.set(p)
+            })
+    })
+
+    bus.on(evs.feed.get, (id) => {
+        console.log('**get feed', id)
+        client.getRelevantPosts(id)
+            .then(res => {
+                console.log('got posts', res)
+                state.feed.set(res.msg)
             })
     })
 }
