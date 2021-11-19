@@ -1,5 +1,11 @@
 require('isomorphic-fetch')
-var BASE_URL = typeof process === 'object' ? 'http://localhost:8888' : ''
+// if we are running in node, not a browser
+var BASE_URL = typeof process === 'object' ?
+    'http://localhost:8888' :
+    ''
+
+console.log('oppppoo', process)
+console.log('typeof', typeof process)
 
 module.exports = {
     post: function (keys, msg, files) {
