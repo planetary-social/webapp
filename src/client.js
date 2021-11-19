@@ -1,5 +1,4 @@
 require('isomorphic-fetch')
-// if we are running in node, not a browser
 var BASE_URL = !process.browser ?  'http://localhost:8888' : ''
 
 console.log('oppppoo', process)
