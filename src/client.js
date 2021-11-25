@@ -1,9 +1,6 @@
 require('isomorphic-fetch')
 var BASE_URL = !process.browser ?  'http://localhost:8888' : ''
 
-console.log('oppppoo', process)
-console.log('typeof', typeof process)
-
 module.exports = {
     post: function (keys, msg, files) {
         return fetch(BASE_URL + '/.netlify/functions/post', {
