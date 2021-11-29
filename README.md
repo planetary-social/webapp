@@ -2,17 +2,17 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/e3e33fd9-bbef-43b9-932b-edfeacbf9157/deploy-status)](https://app.netlify.com/sites/planetary-webapp/deploys)
 
-Trying vercel
-
-* https://vercel.com/planetary-webapp/webapp
-* https://webapp-blush.vercel.app/api/test
-
---------------------------------
-
 Trying netlify
 
 * https://app.netlify.com/sites/planetary-webapp/overview
 * https://planetary-webapp.netlify.app/
+
+## develop
+Be sure to setup the environment variables.
+
+```
+$ npm start
+```
 
 ## environment
 The variable "TEST_PW" is used for testing invitations.
@@ -30,7 +30,6 @@ TEST_PW="123"
 ## lambda functions
 docs:
 https://docs.netlify.com/functions/overview/
-
 
 ## test
 

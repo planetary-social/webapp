@@ -111,10 +111,11 @@ test('get relvant posts', t => {
         .catch(err => {
             t.fail(err.toString())
             t.end()
-        }) 
+        })
 })
 
 test('all done', function (t) {
     ntl.kill()
     t.end()
 })
+
