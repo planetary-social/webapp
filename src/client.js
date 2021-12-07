@@ -1,5 +1,5 @@
 require('isomorphic-fetch')
-var BASE_URL = !process.browser ?  'http://localhost:8888' : ''
+var BASE_URL = process.browser ? '' : 'http://localhost:8888'
 
 module.exports = {
     post: function (keys, msg, files) {
